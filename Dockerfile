@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:3.1 as build-env
 WORKDIR /src
-COPY ./poojastores/ppojastores/trunk /src
+COPY ./poojastores/ppojastores/trunk/* .
 RUN dotnet restore
 RUN dotnet publish -c Release -o /publish
 
