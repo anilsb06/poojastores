@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poojastores
+  labels:
+    app: poojastores
+spec:
+  serviceName: "poojastores-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poojastores
+  template:
+    metadata:
+      labels:
+        app: poojastores
+    spec:
+      containers:
+        - name: poojastores-pod
+          image: anilsb06/poojastores
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: poojastores-service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+  labels:
+    app: poojastores
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 85
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: poojastores
