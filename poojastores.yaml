@@ -6,7 +6,6 @@ metadata:
   labels:
     app: poojastores
 spec:
-  serviceName: "poojastores-service"
   replicas: 1
   selector:
     matchLabels:
