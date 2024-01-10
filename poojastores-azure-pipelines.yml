@@ -18,6 +18,6 @@ jobs:
         repository: 'poojastores'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: '1.0'
+        tags: 'latest'
         addPipelineData: false
         addBaseImageData: false
