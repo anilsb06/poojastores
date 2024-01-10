@@ -12,7 +12,11 @@ jobs:
       inputs:
         dockerVersion: '17.09.0-ce'
   
-    - task: CmdLine@2
+    - task: Docker@2
       inputs:
-        script: 'docker login anilsb06.azurecr.io -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)'
+        containerRegistry: 'azure-acr-service-connection'
+        repository: 'poojastores'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
     
+
