@@ -6,7 +6,7 @@ pool:
 
 
 jobs:
-- job: build docker image
+- job: build_docker_image
   steps:
     - task: DockerInstaller@0
       inputs:
