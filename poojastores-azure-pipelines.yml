@@ -15,15 +15,21 @@ jobs:
     - bash: echo Contents in System Default Working Directory; ls $(System.DefaultWorkingDirectory)        
     - bash: echo Before copying Contents in Build Artifact Directory; ls $(Build.ArtifactStagingDirectory)
     
-    - task: Docker@2
+    #- task: Docker@2
+    #  inputs:
+    #    containerRegistry: 'azure-acr-service-connection'
+    #    repository: 'poojastores'
+    #    command: 'buildAndPush'
+    #    Dockerfile: '**/Dockerfile'
+    #    tags: 'latest'
+    #    addPipelineData: false
+    #    addBaseImageData: false
+    - task: CopyPublishBuildArtifacts@1
       inputs:
-        containerRegistry: 'azure-acr-service-connection'
-        repository: 'poojastores'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: 'latest'
-        addPipelineData: false
-        addBaseImageData: false
+        CopyRoot: '$(System.DefaultWorkingDirectory)'
+        Contents: 'Dockerfile'
+        ArtifactName: 'Dockerfile'
+        ArtifactType: 'FilePath'
     - bash: echo Contents in System Default Working Directory; ls $(System.DefaultWorkingDirectory)        
     - bash: echo Before copying Contents in Build Artifact Directory; ls $(Build.ArtifactStagingDirectory)
     - task: PublishBuildArtifacts@1
