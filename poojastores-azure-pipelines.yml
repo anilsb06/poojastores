@@ -24,12 +24,11 @@ jobs:
     #    tags: 'latest'
     #    addPipelineData: false
     #    addBaseImageData: false
-    - task: CopyPublishBuildArtifacts@1
+    - task: CopyFiles@2
       inputs:
-        CopyRoot: '$(System.DefaultWorkingDirectory)'
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: 'Dockerfile'
-        ArtifactName: 'Dockerfile'
-        ArtifactType: 'FilePath'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - bash: echo Contents in System Default Working Directory; ls $(System.DefaultWorkingDirectory)        
     - bash: echo Before copying Contents in Build Artifact Directory; ls $(Build.ArtifactStagingDirectory)
     - task: PublishBuildArtifacts@1
