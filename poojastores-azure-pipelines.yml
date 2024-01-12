@@ -12,9 +12,9 @@ jobs:
       inputs:
         dockerVersion: '17.09.0-ce'
     
-    - bash: echo Contents in System Default Working Directory; ls -R $(System.DefaultWorkingDirectory)        
-    - bash: echo Before copying Contents in Build Artifact Directory; ls -R $(Build.ArtifactStagingDirectory)
-
+    - bash: echo Contents in System Default Working Directory; ls $(System.DefaultWorkingDirectory)        
+    - bash: echo Before copying Contents in Build Artifact Directory; ls $(Build.ArtifactStagingDirectory)
+    
     - task: Docker@2
       inputs:
         containerRegistry: 'azure-acr-service-connection'
@@ -24,3 +24,10 @@ jobs:
         tags: 'latest'
         addPipelineData: false
         addBaseImageData: false
+    - bash: echo Contents in System Default Working Directory; ls $(System.DefaultWorkingDirectory)        
+    - bash: echo Before copying Contents in Build Artifact Directory; ls $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'image'
+        publishLocation: 'Container'
