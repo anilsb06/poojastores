@@ -12,6 +12,9 @@ jobs:
       inputs:
         dockerVersion: '17.09.0-ce'
     
+    - bash: echo Contents in System Default Working Directory; ls -R $(System.DefaultWorkingDirectory)        
+    - bash: echo Before copying Contents in Build Artifact Directory; ls -R $(Build.ArtifactStagingDirectory)
+
     - task: Docker@2
       inputs:
         containerRegistry: 'azure-acr-service-connection'
